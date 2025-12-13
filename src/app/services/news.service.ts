@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { NewsResponse, NewsCategory } from '../models/news.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NewsService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = '/api/cnn-news';
+  private readonly baseUrl = `${environment.apiUrl}/cnn-news`;
 
   getNewsByCategory(category: NewsCategory): Observable<NewsResponse> {
     return this.http.get<NewsResponse>(`${this.baseUrl}/${category}`);
