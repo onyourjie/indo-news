@@ -1,0 +1,15 @@
+.DS_Store
+.CFUserTextEncoding
+Thumbs.db
+
+.android/
+adbkey
+adbkey.pub
+*.keystore
+*.lock
+*.ini
+*.protobuf
+
+node_modules/
+dist/
+.angular/

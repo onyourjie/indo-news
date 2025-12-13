@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://berita-indo-api-next.vercel.app",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
