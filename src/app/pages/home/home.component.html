@@ -2,19 +2,21 @@
   <app-header></app-header>
 
   <!-- main content -->
-  <div class="flex flex-col justify-start items-center w-full px-18 py-18 gap-32">
+  <div class="flex flex-col justify-start items-center w-full px-4 md:px-8 lg:px-18 py-8 md:py-12 lg:py-18 gap-12 md:gap-20 lg:gap-32">
     
     <!-- headline section -->
-    <div class="flex flex-col justify-center items-center self-stretch gap-11 rounded-xl bg-white">
+    <div class="flex flex-col justify-center items-center self-stretch gap-6 md:gap-11 rounded-xl bg-white">
       @if (headlineNews().length > 0) {
-        <div class="flex justify-start items-start self-stretch gap-40">
+        <div class="flex flex-col lg:flex-row justify-start items-start self-stretch gap-6 md:gap-10 lg:gap-40">
           <!-- text content -->
-          <div class="flex flex-col justify-start items-start grow gap-4">
-            <p class="self-stretch max-w-lg text-base font-semibold text-[#526071]">Headline</p>
-            <p class="self-stretch max-w-lg text-4xl font-bold text-[#333]">
-              {{ headlineNews()[currentSlide()].title }}
-            </p>
-            <p class="self-stretch max-w-lg text-base text-[#4f4f4f] line-clamp-4">
+          <div class="flex flex-col justify-start items-start grow gap-3 md:gap-4">
+            <p class="self-stretch max-w-lg text-sm md:text-base font-semibold text-[#526071]">Headline</p>
+            <a [routerLink]="['/detail', 'nasional', currentSlide()]" class="cursor-pointer">
+              <p class="self-stretch max-w-lg text-2xl md:text-3xl lg:text-4xl font-bold text-[#333] hover:text-[#0090ff] transition-colors">
+                {{ headlineNews()[currentSlide()].title }}
+              </p>
+            </a>
+            <p class="self-stretch max-w-lg text-sm md:text-base text-[#4f4f4f] line-clamp-3 md:line-clamp-4">
               {{ headlineNews()[currentSlide()].contentSnippet }}
             </p>
             <div class="flex justify-start items-center gap-3.5">
@@ -43,7 +45,7 @@
           </div>
           
           <!-- image -->
-          <div class="shrink-0 w-160 h-104 overflow-hidden rounded-3xl bg-[#e0e0e0]">
+          <div class="shrink-0 w-full lg:w-160 h-48 md:h-64 lg:h-104 overflow-hidden rounded-xl md:rounded-2xl lg:rounded-3xl bg-[#e0e0e0]">
             <img 
               [src]="getImageUrl(headlineNews()[currentSlide()])" 
               [alt]="headlineNews()[currentSlide()].title"
@@ -76,61 +78,58 @@
     </div>
 
     <!-- berita Terpopuler Section -->
-    <div class="flex flex-col justify-start items-start self-stretch gap-8">
-      <div class="flex justify-start items-start gap-4 py-3">
+    <div class="flex flex-col justify-start items-start self-stretch gap-6 md:gap-8">
+      <div class="flex justify-start items-start gap-3 md:gap-4 py-2 md:py-3">
         <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
-        <p class="text-2xl font-bold text-black">Berita Terpopuler</p>
+        <p class="text-xl md:text-2xl font-bold text-black">Berita Terpopuler</p>
       </div>
       
-      <div class="flex justify-start items-center self-stretch gap-6">
-        @for (news of popularNews(); track $index) {
-          <div class="flex justify-center items-start self-stretch grow gap-4 p-4 rounded-xl relative">
-            <div class="shrink-0 w-36 h-32 overflow-hidden rounded-xl bg-white">
-              <img 
-                [src]="getSmallImageUrl(news)" 
-                [alt]="news.title"
-                class="w-full h-full object-cover"
-              />
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8 self-stretch">
+        @for (news of popularNews().slice(0, 3); track $index) {
+          <a [routerLink]="['/detail', 'nasional', $index]" class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl hover:shadow-lg transition-all duration-300 cursor-pointer group">
+            <div class="relative w-full">
+              <div class="w-full h-48 md:h-56 lg:h-64 overflow-hidden rounded-xl bg-[#e0e0e0]">
+                <img 
+                  [src]="getImageUrl(news)" 
+                  [alt]="news.title"
+                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div class="absolute top-3 left-3 flex justify-center items-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-[#1f2b39]">
+                <p class="text-lg md:text-xl font-bold text-white">{{ $index + 1 }}</p>
+              </div>
             </div>
-            <div class="flex flex-col justify-start items-start grow gap-4">
-              <p class="self-stretch w-52 h-20 text-base font-bold text-[#333] line-clamp-3">
+            <div class="flex flex-col justify-start items-start self-stretch gap-2 md:gap-3 px-1 md:px-2">
+              <p class="self-stretch text-base md:text-lg font-bold text-[#333] line-clamp-2 group-hover:text-[#0090ff] transition-colors">
                 {{ news.title }}
               </p>
-              <div class="flex justify-start items-center gap-3">
-                <p class="text-sm font-semibold text-[#0090ff]">Nasional</p>
+              <div class="flex justify-start items-center gap-2 md:gap-3">
+                <p class="text-xs md:text-sm font-semibold text-[#0090ff]">Politik</p>
                 <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <circle cx="2.37878" cy="2.37878" r="2.37878" fill="#D9D9D9"></circle>
                 </svg>
-                <p class="text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
+                <p class="text-xs md:text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
               </div>
             </div>
-            <div class="flex flex-col justify-center items-start absolute left-1 top-0 gap-2.5 px-3 py-1.5 rounded-full bg-[#1f2b39]">
-              <p class="text-lg font-bold text-white">{{ $index + 1 }}</p>
-            </div>
-          </div>
-          @if ($index < popularNews().length - 1) {
-            <svg width="1" height="100" viewBox="0 0 1 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <line x1="0.5" y1="0" x2="0.5" y2="100" stroke="#E0E0E0"></line>
-            </svg>
-          }
+          </a>
         }
       </div>
     </div>
 
     <!-- rekomendasi untuk anda -->
-    <div class="flex flex-col justify-start items-center self-stretch gap-11">
-      <div class="flex justify-between items-start self-stretch">
-        <div class="flex justify-start items-start gap-4 py-3">
+    <div class="flex flex-col justify-start items-center self-stretch gap-6 md:gap-11">
+      <div class="flex flex-col md:flex-row justify-between items-start self-stretch gap-4">
+        <div class="flex justify-start items-start gap-3 md:gap-4 py-2 md:py-3">
           <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
-          <p class="text-2xl font-bold text-black">Rekomendasi Untuk Anda</p>
+          <p class="text-xl md:text-2xl font-bold text-black">Rekomendasi Untuk Anda</p>
         </div>
-        <div class="flex flex-col justify-start items-start h-16 w-124-1.5">
-          <div class="flex justify-start items-center self-stretch growflow-hidden gap-2.5 px-4 py-3 rounded-lg bg-white border border-[#e0e0e0]">
+        <div class="flex flex-col justify-start items-start w-full md:w-auto">
+          <div class="flex justify-start items-center self-stretch overflow-hidden gap-2.5 px-3 md:px-4 py-2 md:py-3 rounded-lg bg-white border border-[#e0e0e0]">
             <div class="flex justify-start items-center grow gap-2.5">
               <input 
                 type="text" 
                 placeholder="Cari disini..." 
-                class="grow-base text-[#959ea9] outline-none"
+                class="grow text-sm md:text-base text-[#959ea9] outline-none"
               />
             </div>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -142,49 +141,49 @@
         </div>
       </div>
 
-      <div class="flex flex-col justify-start items-center self-stretch gap-16">
-        <div class="grid grid-cols-4 gap-16 self-stretch">
+      <div class="flex flex-col justify-start items-center self-stretch gap-8 md:gap-12 lg:gap-16">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-10 lg:gap-16 self-stretch">
           @for (news of paginatedRecommendedNews; track $index) {
-            <div class="flex flex-col justify-start items-start h-90 w-72 gap-4 rounded-xl">
-              <div class="self-stretch h-52 overflow-hidden rounded-xl bg-[#e0e0e0]">
+            <a [routerLink]="['/detail', 'nasional', (currentPage() - 1) * itemsPerPage + $index]" class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl hover:shadow-lg transition-shadow cursor-pointer">
+              <div class="self-stretch h-40 md:h-48 lg:h-52 overflow-hidden rounded-lg md:rounded-xl bg-[#e0e0e0]">
                 <img 
                   [src]="getSmallImageUrl(news)" 
                   [alt]="news.title"
                   class="w-full h-full object-cover"
                 />
               </div>
-              <div class="flex flex-col justify-start items-start self-stretch gap-3 px-2">
-                <p class="self-stretch text-base font-bold text-[#333] line-clamp-4">
+              <div class="flex flex-col justify-start items-start self-stretch gap-2 md:gap-3 px-1 md:px-2">
+                <p class="self-stretch text-sm md:text-base font-bold text-[#333] line-clamp-3 md:line-clamp-4 hover:text-[#0090ff] transition-colors">
                   {{ news.title }}
                 </p>
-                <div class="flex justify-start items-center gap-3">
-                  <p class="text-sm font-semibold text-[#0090ff]">Nasional</p>
+                <div class="flex justify-start items-center gap-2 md:gap-3">
+                  <p class="text-xs md:text-sm font-semibold text-[#0090ff]">Nasional</p>
                   <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="2.37878" cy="2.37878" r="2.37878" fill="#D9D9D9"></circle>
                   </svg>
                   <p class="text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
                 </div>
               </div>
-            </div>
+            </a>
           }
         </div>
 
         <!-- pagination -->
-        <div class="flex justify-start items-center self-stretch h-20 overflow-hidden gap-14 px-4 py-5 bg-white">
-          <div class="flex justify-between items-center grow overflow-hidden">
-            <p class="text-base text-[#333]">
+        <div class="flex justify-start items-center self-stretch overflow-hidden gap-4 md:gap-14 px-2 md:px-4 py-4 md:py-5 bg-white">
+          <div class="flex flex-col md:flex-row justify-between items-center grow overflow-hidden gap-4">
+            <p class="text-xs md:text-sm lg:text-base text-[#333] text-center md:text-left">
               Showing {{ (currentPage() - 1) * itemsPerPage + 1 }} to {{ showingTo }} of {{ recommendedNews().length }} results
             </p>
-            <div class="flex justify-start items-center gap-5">
+            <div class="flex justify-start items-center gap-2 md:gap-5 flex-wrap">
               <button 
                 (click)="changePage(currentPage() - 1)"
                 [disabled]="currentPage() === 1"
-                class="flex justify-start items-center gap-1.5 disabled:opacity-50"
+                class="flex justify-start items-center gap-1 md:gap-1.5 disabled:opacity-50 px-2 md:px-0"
               >
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 7.9999C12 8.13251 11.9473 8.25968 11.8535 8.35345C11.7598 8.44722 11.6326 8.4999 11.5 8.4999H5.70698L7.85398 10.6459C7.90047 10.6924 7.93734 10.7476 7.9625 10.8083C7.98766 10.8691 8.00061 10.9342 8.00061 10.9999C8.00061 11.0656 7.98766 11.1307 7.9625 11.1915C7.93734 11.2522 7.90047 11.3074 7.85398 11.3539C7.80749 11.4004 7.7523 11.4373 7.69156 11.4624C7.63082 11.4876 7.56572 11.5005 7.49998 11.5005C7.43423 11.5005 7.36913 11.4876 7.30839 11.4624C7.24766 11.4373 7.19247 11.4004 7.14598 11.3539L4.14598 8.3539C4.09941 8.30745 4.06247 8.25228 4.03727 8.19153C4.01206 8.13079 3.99908 8.06567 3.99908 7.9999C3.99908 7.93413 4.01206 7.86901 4.03727 7.80827C4.06247 7.74752 4.09941 7.69234 4.14598 7.6459L7.14598 4.6459C7.23986 4.55201 7.3672 4.49927 7.49998 4.49927C7.63275 4.49927 7.76009 4.55201 7.85398 4.6459C7.94787 4.73979 8.00061 4.86712 8.00061 4.9999C8.00061 5.13268 7.94787 5.26001 7.85398 5.3539L5.70698 7.4999H11.5C11.6326 7.4999 11.7598 7.55258 11.8535 7.64635C11.9473 7.74011 12 7.86729 12 7.9999Z" fill="#828282"></path>
                 </svg>
-                <p class="text-base text-[#526071]">Previous</p>
+                <p class="text-sm md:text-base text-[#526071] hidden sm:block">Previous</p>
               </button>
 
               @for (page of [].constructor(totalPages); track $index) {
@@ -194,7 +193,7 @@
                     [class.bg-[#0090ff]]="currentPage() === $index + 1"
                     [class.text-white]="currentPage() === $index + 1"
                     [class.text-[#526071]]="currentPage() !== $index + 1"
-                    class="flex flex-col justify-start items-start gap-2.5 px-4 py-2 rounded-lg font-medium"
+                    class="flex flex-col justify-start items-start gap-2.5 px-3 md:px-4 py-1.5 md:py-2 rounded-lg font-medium text-sm md:text-base"
                   >
                     {{ $index + 1 }}
                   </button>
@@ -206,9 +205,9 @@
               <button 
                 (click)="changePage(currentPage() + 1)"
                 [disabled]="currentPage() === totalPages"
-                class="flex justify-start items-center gap-1.5 disabled:opacity-50"
+                class="flex justify-start items-center gap-1 md:gap-1.5 disabled:opacity-50 px-2 md:px-0"
               >
-                <p class="text-base text-[#526071]">Next</p>
+                <p class="text-sm md:text-base text-[#526071] hidden sm:block">Next</p>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.9999C4 7.86729 4.05268 7.74011 4.14645 7.64635C4.24021 7.55258 4.36739 7.4999 4.5 7.4999H10.293L8.146 5.3539C8.05211 5.26001 7.99937 5.13268 7.99937 4.9999C7.99937 4.86712 8.05211 4.73979 8.146 4.6459C8.23989 4.55201 8.36722 4.49927 8.5 4.49927C8.63278 4.49927 8.76011 4.55201 8.854 4.6459L11.854 7.6459C11.9006 7.69234 11.9375 7.74752 11.9627 7.80827C11.9879 7.86901 12.0009 7.93413 12.0009 7.9999C12.0009 8.06567 11.9879 8.13079 11.9627 8.19153C11.9375 8.25228 11.9006 8.30745 11.854 8.3539L8.854 11.3539C8.76011 11.4478 8.63278 11.5005 8.5 11.5005C8.36722 11.5005 8.23989 11.4478 8.146 11.3539C8.05211 11.26 7.99937 11.1327 7.99937 10.9999C7.99937 10.8671 8.05211 10.7398 8.146 10.6459L10.293 8.4999H4.5C4.36739 8.4999 4.24021 8.44722 4.14645 8.35345C4.05268 8.25968 4 8.13251 4 7.9999Z" fill="#828282"></path>
                 </svg>
