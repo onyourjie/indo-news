@@ -188,7 +188,7 @@
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-9 self-stretch">
             @for (news of relatedNews(); track $index) {
-              <a [routerLink]="['/detail', category(), $index]" class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl cursor-pointer">
+              <a [routerLink]="['/detail', category(), encodeLink(news.link)]" class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl cursor-pointer">
                 <div class="self-stretch h-40 md:h-44 lg:h-46.75 overflow-hidden rounded-lg bg-[#e0e0e0]">
                   <img [src]="getImageUrl(news)" [alt]="news.title" class="w-full h-full object-cover" />
                 </div>
@@ -217,7 +217,7 @@
 
         <div class="flex flex-col justify-center items-start self-stretch gap-4 md:gap-6">
           @for (news of popularNews(); track $index) {
-            <a [routerLink]="['/detail', 'nasional', $index]" class="flex justify-center items-start self-stretch h-auto md:h-40 gap-3 md:gap-4 p-3 md:p-4 rounded-xl relative cursor-pointer">
+            <a [routerLink]="['/detail', 'nasional', encodeLink(news.link)]" class="flex justify-center items-start self-stretch h-auto md:h-40 gap-3 md:gap-4 p-3 md:p-4 rounded-xl relative cursor-pointer">
               <div class="shrink-0 w-32 md:w-36.75 h-28 md:h-32 overflow-hidden rounded-lg md:rounded-xl bg-white">
                 <img [src]="getSmallImageUrl(news)" [alt]="news.title" class="w-full h-full object-cover" />
               </div>

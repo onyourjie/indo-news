@@ -51,7 +51,7 @@
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10 self-stretch">
             @for (news of paginatedNews; track $index) {
               <a 
-                [routerLink]="['/detail', category(), (currentPage() - 1) * itemsPerPage + $index]" 
+                [routerLink]="['/detail', category(), encodeLink(news.link)]" 
                 class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl cursor-pointer"
               >
                 <div class="self-stretch h-48 md:h-52 lg:h-56 overflow-hidden rounded-xl bg-[#e0e0e0]">

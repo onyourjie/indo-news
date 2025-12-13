@@ -118,6 +118,10 @@ export class CategoryComponent implements OnInit {
     }
   }
 
+  encodeLink(link: string): string {
+    return encodeURIComponent(link);
+  }
+
   formatDate(isoDate: string): string {
     if (!isoDate) return '';
     const date = new Date(isoDate);

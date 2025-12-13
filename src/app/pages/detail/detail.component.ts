@@ -17,7 +17,7 @@ export class DetailComponent implements OnInit {
   relatedNews = signal<any[]>([]);
   popularNews = signal<any[]>([]);
   category = signal<string>('');
-  newsIndex = signal<number>(0);
+  newsLink = signal<string>('');
   allNews = signal<any[]>([]);
   isLoading = signal(true);
   comments = signal<any[]>([
@@ -46,7 +46,7 @@ export class DetailComponent implements OnInit {
     // Get params from route
     this.route.params.subscribe(params => {
       this.category.set(params['category']);
-      this.newsIndex.set(+params['id']);
+      this.newsLink.set(decodeURIComponent(params['id']));
       this.loadNewsDetail();
       this.loadRelatedNews();
       this.loadPopularNews();
@@ -59,9 +59,12 @@ export class DetailComponent implements OnInit {
     this.newsService.getHeadline(category).subscribe({
       next: (response: any) => {
         this.allNews.set(response.data);
-        const index = this.newsIndex();
-        if (response.data && response.data[index]) {
-          this.newsDetail.set(response.data[index]);
+        const newsLink = this.newsLink();
+        const foundNews = response.data.find((news: any) => news.link === newsLink);
+        if (foundNews) {
+          this.newsDetail.set(foundNews);
+        } else {
+          console.error('News not found with link:', newsLink);
         }
         this.isLoading.set(false);
       },
@@ -102,6 +105,10 @@ export class DetailComponent implements OnInit {
     const month = months[date.getMonth()];
     const year = date.getFullYear();
     return `${day} ${month} ${year}`;
+  }
+
+  encodeLink(link: string): string {
+    return encodeURIComponent(link);
   }
 
   getImageUrl(news: any): string {

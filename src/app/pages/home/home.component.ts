@@ -147,6 +147,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  encodeLink(link: string): string {
+    return encodeURIComponent(link);
+  }
+
   getImageUrl(newsItem: NewsItem): string {
     return newsItem.image?.large || newsItem.image?.small || 'https://via.placeholder.com/637x417';
   }
