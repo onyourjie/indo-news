@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, OnDestroy, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../../components/header/header.component';
@@ -13,7 +13,7 @@ import { NewsItem } from '../../models/news.model';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   headlineNews = signal<NewsItem[]>([]);
   popularNews = signal<NewsItem[]>([]);
   recommendedNews = signal<NewsItem[]>([]);
@@ -23,11 +23,33 @@ export class HomeComponent implements OnInit {
   itemsPerPage = 8;
   isLoading = signal(true);
   searchQuery = signal<string>('');
+  
+  // banner
+  banners = [
+    'assets/banner.svg',
+    'assets/banner1.svg',
+    'assets/banner2.svg'
+  ];
+  currentBanner = signal(0);
+  private bannerInterval: any;
 
   constructor(private newsService: NewsService) {}
 
   ngOnInit() {
     this.loadNews();
+    this.startBannerAutoSlide();
+  }
+
+  ngOnDestroy() {
+    if (this.bannerInterval) {
+      clearInterval(this.bannerInterval);
+    }
+  }
+
+  startBannerAutoSlide() {
+    this.bannerInterval = setInterval(() => {
+      this.currentBanner.update(val => (val + 1) % this.banners.length);
+    }, 5000);
   }
 
   loadNews() {

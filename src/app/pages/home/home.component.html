@@ -227,6 +227,34 @@
         </div>
       </div>
     </div>
+
+    <!-- banner section -->
+    <div class="flex justify-center items-center self-stretch w-full overflow-hidden rounded-2xl">
+      <div class="relative w-full h-48 md:h-64 lg:h-80 overflow-hidden rounded-2xl">
+        <div class="flex transition-transform duration-700 ease-in-out h-full" [style.transform]="'translateX(-' + (currentBanner() * 100) + '%)'">
+          @for (banner of banners; track $index) {
+            <div class="w-full h-full shrink-0">
+              <img 
+                [src]="banner" 
+                alt="Banner {{ $index + 1 }}"
+                class="w-full h-full object-contain"
+              />
+            </div>
+          }
+        </div>
+        
+        <!-- banner-->
+        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+          @for (banner of banners; track $index) {
+            <button
+              (click)="currentBanner.set($index)"
+              [class]="currentBanner() === $index ? 'bg-white' : 'bg-white/50'"
+              class="w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300"
+            ></button>
+          }
+        </div>
+      </div>
+    </div>
     }
 
   </div>
