@@ -17,7 +17,6 @@ export interface NewsResponse {
 }
 
 export type NewsCategory = 
-  | 'terbaru'
   | 'nasional' 
   | 'internasional' 
   | 'ekonomi' 

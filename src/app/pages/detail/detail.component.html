@@ -1,0 +1,243 @@
+<div class="w-full min-h-screen bg-white">
+  <app-header></app-header>
+
+  <!-- main content -->
+  <div class="flex flex-col justify-start items-center w-full px-4 md:px-8 lg:px-18 py-8 md:py-12 lg:py-16 gap-8 md:gap-12 lg:gap-16 mt-20 md:mt-24 lg:mt-28">
+    
+    <!-- breadcrumb -->
+    <div class="flex justify-start items-center w-full gap-2 md:gap-3">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+        <path d="M8.7069 1.5C8.51937 1.31253 8.26506 1.20721 7.9999 1.20721C7.73474 1.20721 7.48043 1.31253 7.2929 1.5L0.645899 8.146C0.599411 8.19249 0.562535 8.24768 0.537376 8.30842C0.512217 8.36916 0.499268 8.43426 0.499268 8.5C0.499268 8.56574 0.512217 8.63085 0.537376 8.69158C0.562535 8.75232 0.599411 8.80751 0.645899 8.854C0.739786 8.94789 0.867123 9.00063 0.999899 9.00063C1.06564 9.00063 1.13074 8.98768 1.19148 8.96252C1.25222 8.93737 1.30741 8.90049 1.3539 8.854L1.9999 8.207V13.5C1.9999 13.8978 2.15793 14.2794 2.43924 14.5607C2.72054 14.842 3.10207 15 3.4999 15H12.4999C12.8977 15 13.2793 14.842 13.5606 14.5607C13.8419 14.2794 13.9999 13.8978 13.9999 13.5V8.207L14.6459 8.854C14.7398 8.94789 14.8671 9.00063 14.9999 9.00063C15.1327 9.00063 15.26 8.94789 15.3539 8.854C15.4478 8.76011 15.5005 8.63278 15.5005 8.5C15.5005 8.36723 15.4478 8.23989 15.3539 8.146L12.9999 5.793V2.5C12.9999 2.36739 12.9472 2.24022 12.8535 2.14645C12.7597 2.05268 12.6325 2 12.4999 2H11.4999C11.3673 2 11.2401 2.05268 11.1463 2.14645C11.0526 2.24022 10.9999 2.36739 10.9999 2.5V3.793L8.7069 1.5ZM12.9999 7.207V13.5C12.9999 13.6326 12.9472 13.7598 12.8535 13.8536C12.7597 13.9473 12.6325 14 12.4999 14H3.4999C3.36729 14 3.24011 13.9473 3.14635 13.8536C3.05258 13.7598 2.9999 13.6326 2.9999 13.5V7.207L7.9999 2.207L12.9999 7.207Z" fill="#333333"></path>
+      </svg>
+      <p class="text-sm md:text-base lg:text-lg text-[#333]">Beranda</p>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-3.5 md:h-3.5">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.0653 1.44025C4.10594 1.39951 4.15422 1.36719 4.20737 1.34513C4.26052 1.32307 4.3175 1.31172 4.37505 1.31172C4.4326 1.31172 4.48958 1.32307 4.54273 1.34513C4.59588 1.36719 4.64416 1.39951 4.6848 1.44025L9.9348 6.69025C9.97554 6.73089 10.0079 6.77917 10.0299 6.83232C10.052 6.88548 10.0633 6.94246 10.0633 7C10.0633 7.05755 10.052 7.11453 10.0299 7.16768C10.0079 7.22083 9.97554 7.26911 9.9348 7.30975L4.6848 12.5598C4.60265 12.6419 4.49123 12.6881 4.37505 12.6881C4.25887 12.6881 4.14745 12.6419 4.0653 12.5598C3.98315 12.4776 3.937 12.3662 3.937 12.25C3.937 12.1338 3.98315 12.0224 4.0653 11.9403L9.00643 7L4.0653 2.05975C4.02456 2.01911 3.99223 1.97084 3.97018 1.91768C3.94812 1.86453 3.93677 1.80755 3.93677 1.75C3.93677 1.69246 3.94812 1.63548 3.97018 1.58232C3.99223 1.52917 4.02456 1.48089 4.0653 1.44025Z" fill="#333333"></path>
+      </svg>
+      <p class="text-sm md:text-base lg:text-lg text-[#333] capitalize">{{ category() }}</p>
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 md:w-3.5 md:h-3.5">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M4.0653 1.44025C4.10594 1.39951 4.15422 1.36719 4.20737 1.34513C4.26052 1.32307 4.3175 1.31172 4.37505 1.31172C4.4326 1.31172 4.48958 1.32307 4.54273 1.34513C4.59588 1.36719 4.64416 1.39951 4.6848 1.44025L9.9348 6.69025C9.97554 6.73089 10.0079 6.77917 10.0299 6.83232C10.052 6.88548 10.0633 6.94246 10.0633 7C10.0633 7.05755 10.052 7.11453 10.0299 7.16768C10.0079 7.22083 9.97554 7.26911 9.9348 7.30975L4.6848 12.5598C4.60265 12.6419 4.49123 12.6881 4.37505 12.6881C4.25887 12.6881 4.14745 12.6419 4.0653 12.5598C3.98315 12.4776 3.937 12.3662 3.937 12.25C3.937 12.1338 3.98315 12.0224 4.0653 11.9403L9.00643 7L4.0653 2.05975C4.02456 2.01911 3.99223 1.97084 3.97018 1.91768C3.94812 1.86453 3.93677 1.80755 3.93677 1.75C3.93677 1.69246 3.94812 1.63548 3.97018 1.58232C3.99223 1.52917 4.02456 1.48089 4.0653 1.44025Z" fill="#333333"></path>
+      </svg>
+      <p class="text-sm md:text-base lg:text-lg text-[#333]">Detail</p>
+    </div>
+
+    <!-- content grid -->
+    <div class="flex flex-col lg:flex-row justify-center items-start w-full gap-6 md:gap-8 lg:gap-5.5">
+      
+      <!-- main Content -->
+      <div class="flex flex-col justify-start items-center grow gap-12 md:gap-20 lg:gap-35 w-full lg:w-auto">
+        
+        <!-- article -->
+        <div class="flex flex-col justify-start items-center self-stretch gap-12 md:gap-16 lg:gap-18">
+          <div class="flex flex-col justify-start items-center self-stretch gap-6 md:gap-8 lg:gap-9">
+            <!-- title & meta -->
+            <div class="flex flex-col justify-start items-start self-stretch gap-4 md:gap-5 lg:gap-6">
+              @if (newsDetail()) {
+                <p class="self-stretch text-2xl md:text-3xl lg:text-4xl font-semibold text-[#333]">
+                  {{ newsDetail().title }}
+                </p>
+                <div class="flex justify-start items-center gap-2 md:gap-3">
+                  <p class="text-sm md:text-base font-semibold text-[#0090ff] capitalize">{{ category() }}</p>
+                  <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="2.37878" cy="2.37878" r="2.37878" fill="#D9D9D9"></circle>
+                  </svg>
+                  <p class="text-sm md:text-base font-medium text-[#526071]">{{ formatDate(newsDetail().isoDate) }}</p>
+                </div>
+              }
+            </div>
+
+            <!-- image -->
+            <div class="flex flex-col justify-start items-center self-stretch gap-2 md:gap-3">
+              @if (newsDetail()) {
+                <div class="self-stretch h-64 md:h-96 lg:h-133.75 overflow-hidden rounded-xl md:rounded-2xl bg-[#e0e0e0]">
+                  <img [src]="getImageUrl(newsDetail())" [alt]="newsDetail().title" class="w-full h-full object-cover" />
+                </div>
+                <p class="self-stretch text-sm md:text-base font-medium text-[#959ea9]">
+                  {{ newsDetail().title }}
+                </p>
+              }
+            </div>
+          </div>
+
+          <!-- article content -->
+          @if (newsDetail()) {
+            <div class="self-stretch text-sm md:text-base font-medium text-[#526071] leading-relaxed">
+              <p>{{ newsDetail().contentSnippet }}</p>
+              @if (newsDetail().description) {
+                <br /><br />
+                <div [innerHTML]="newsDetail().description"></div>
+              }
+              <br /><br />
+              <a [href]="newsDetail().link" target="_blank" class="inline-flex items-center gap-2 text-[#0090ff] hover:underline">
+                <span>Baca selengkapnya di sumber asli</span>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M14 2.5C14 2.36739 13.9473 2.24021 13.8536 2.14645C13.7598 2.05268 13.6326 2 13.5 2H7.50001C7.3674 2 7.24022 2.05268 7.14645 2.14645C7.05268 2.24021 7.00001 2.36739 7.00001 2.5C7.00001 2.63261 7.05268 2.75979 7.14645 2.85355C7.24022 2.94732 7.3674 3 7.50001 3H12.293L2.14601 13.146C2.09952 13.1925 2.06264 13.2477 2.03748 13.3084C2.01232 13.3692 1.99937 13.4343 1.99937 13.5C1.99937 13.5657 2.01232 13.6308 2.03748 13.6916C2.06264 13.7523 2.09952 13.8075 2.14601 13.854C2.19249 13.9005 2.24768 13.9374 2.30842 13.9625C2.36916 13.9877 2.43426 14.0006 2.50001 14.0006C2.56575 14.0006 2.63085 13.9877 2.69159 13.9625C2.75233 13.9374 2.80752 13.9005 2.85401 13.854L13 3.707V8.5C13 8.63261 13.0527 8.75979 13.1465 8.85355C13.2402 8.94732 13.3674 9 13.5 9C13.6326 9 13.7598 8.94732 13.8536 8.85355C13.9473 8.75979 14 8.63261 14 8.5V2.5Z" fill="#0090FF"></path>
+                </svg>
+              </a>
+            </div>
+          }
+        </div>
+
+        <!-- comments section -->
+        <div class="flex flex-col justify-start items-center self-stretch gap-4 md:gap-6">
+          <div class="flex justify-start items-start self-stretch gap-3 md:gap-4 py-2 md:py-3">
+            <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
+            <p class="text-xl md:text-2xl font-bold text-black">Komentar</p>
+          </div>
+
+          <!-- Comment Form -->
+          <div class="flex justify-start items-start self-stretch gap-3 md:gap-4 p-4 md:p-6 bg-white border-b border-[#e0e0e0]">
+            <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+            <div class="flex flex-col justify-start items-start grow gap-3 md:gap-1.5">
+              <textarea 
+                placeholder="Apa yang ingin anda tanyakan?"
+                class="w-full h-32 md:h-41.5 p-3 md:p-4 rounded-lg border border-[#e0e0e0] text-sm md:text-base text-[#bdbdbd] outline-none resize-none"
+              ></textarea>
+              <div class="flex justify-end items-start self-stretch gap-3.5">
+                <p class="text-xs text-[#526071]">0/50</p>
+              </div>
+              <button class="px-4 md:px-5 py-2.5 md:py-3.5 rounded-lg bg-[#0090ff] text-sm md:text-base font-medium text-white">
+                Kirim
+              </button>
+            </div>
+          </div>
+
+          <!-- comment list -->
+          @for (comment of comments(); track comment.id) {
+            <div class="flex flex-col justify-start items-start self-stretch gap-3 md:gap-4 p-4 md:p-6 bg-white border-b border-[#e0e0e0]">
+              <div class="flex justify-start items-start self-stretch gap-3 md:gap-4">
+                <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+                <div class="flex flex-col justify-start items-start grow gap-2 md:gap-3">
+                  <div class="flex justify-start items-center gap-2 md:gap-3">
+                    <p class="text-xs md:text-sm font-medium text-[#526071]">{{ comment.author }}</p>
+                    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="2.5" cy="2.5" r="2.5" fill="#BDBDBD"></circle>
+                    </svg>
+                    <p class="text-xs md:text-sm text-[#959ea9]">{{ comment.date }}</p>
+                  </div>
+                  <p class="self-stretch text-sm md:text-base text-[#333]">{{ comment.content }}</p>
+                  <button class="px-0.5 py-1 text-sm md:text-base font-medium text-[#0090ff]">Balas</button>
+                </div>
+              </div>
+
+              <!-- replies -->
+              @for (reply of comment.replies; track reply.id) {
+                <div class="flex justify-start items-start self-stretch gap-3 md:gap-4 pl-12 md:pl-18">
+                  <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+                  <div class="flex flex-col justify-start items-start grow gap-2 md:gap-3">
+                    <div class="flex justify-start items-center gap-2 md:gap-3">
+                      <p class="text-xs md:text-sm font-medium text-[#526071]">{{ reply.author }}</p>
+                      <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="2.5" cy="2.5" r="2.5" fill="#BDBDBD"></circle>
+                      </svg>
+                      <p class="text-xs md:text-sm text-[#959ea9]">{{ reply.date }}</p>
+                    </div>
+                    <p class="self-stretch text-sm md:text-base text-[#333]">{{ reply.content }}</p>
+                    <button class="px-0.5 py-1 text-sm md:text-base font-medium text-[#0090ff]">Balas</button>
+                  </div>
+                </div>
+              }
+            </div>
+          }
+
+          <!-- pagination -->
+          <div class="flex justify-start items-center self-stretch h-auto md:h-17 gap-6 md:gap-13.5 px-2 md:px-4 py-4 md:py-5 bg-white">
+            <div class="flex flex-col md:flex-row justify-between items-center grow gap-4">
+              <div class="flex justify-start items-center gap-3 md:gap-4">
+                <p class="text-sm md:text-base text-[#333]">Item per page</p>
+                <div class="flex justify-start items-center gap-2 md:gap-3 border-b border-[#e0e0e0] pb-1">
+                  <p class="text-sm md:text-base text-[#333]">5</p>
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 md:w-5 md:h-5">
+                    <path d="M13.418 7.85907C13.5481 7.73022 13.7239 7.65794 13.907 7.65794C14.0901 7.65794 14.2659 7.73022 14.396 7.85907C14.4603 7.92235 14.5113 7.99777 14.5461 8.08095C14.5809 8.16412 14.5989 8.2534 14.5989 8.34357C14.5989 8.43375 14.5809 8.52302 14.5461 8.6062C14.5113 8.68938 14.4603 8.7648 14.396 8.82807L10.488 12.6581C10.3576 12.7867 10.1817 12.8589 9.99851 12.8589C9.8153 12.8589 9.63944 12.7867 9.50901 12.6581L5.60101 8.82807C5.53676 8.7648 5.48574 8.68938 5.45091 8.6062C5.41609 8.52302 5.39815 8.43375 5.39815 8.34357C5.39815 8.2534 5.41609 8.16412 5.45091 8.08094C5.48574 7.99777 5.53676 7.92235 5.60101 7.85907C5.73144 7.7304 5.9073 7.65826 6.09051 7.65826C6.27373 7.65826 6.44958 7.7304 6.58001 7.85907L10 11.0001L13.418 7.85907Z" fill="#333333"></path>
+                  </svg>
+                </div>
+                <p class="text-sm md:text-base text-[#333]">of 200</p>
+              </div>
+              <div class="flex justify-start items-center gap-2 md:gap-4">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3539 1.64592C11.4005 1.69236 11.4374 1.74754 11.4626 1.80828C11.4878 1.86903 11.5008 1.93415 11.5008 1.99992C11.5008 2.06568 11.4878 2.13081 11.4626 2.19155C11.4374 2.2523 11.4005 2.30747 11.3539 2.35392L5.70692 7.99992L11.3539 13.6459C11.4478 13.7398 11.5005 13.8671 11.5005 13.9999C11.5005 14.1327 11.4478 14.26 11.3539 14.3539C11.26 14.4478 11.1327 14.5005 10.9999 14.5005C10.8671 14.5005 10.7398 14.4478 10.6459 14.3539L4.64592 8.35392C4.59935 8.30747 4.56241 8.2523 4.5372 8.19155C4.512 8.13081 4.49902 8.06568 4.49902 7.99992C4.49902 7.93415 4.512 7.86903 4.5372 7.80828C4.56241 7.74754 4.59935 7.69236 4.64592 7.64592L10.6459 1.64592C10.6924 1.59935 10.7475 1.56241 10.8083 1.5372C10.869 1.512 10.9341 1.49902 10.9999 1.49902C11.0657 1.49902 11.1308 1.512 11.1916 1.5372C11.2523 1.56241 11.3075 1.59935 11.3539 1.64592Z" fill="#828282"></path>
+                </svg>
+                <button class="px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm md:text-base text-[#0090ff] bg-white">1</button>
+                <button class="px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm md:text-base text-[#526071]">2</button>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4">
+                  <path fill-rule="evenodd" clip-rule="evenodd" d="M4.64592 1.64592C4.69236 1.59935 4.74754 1.56241 4.80828 1.5372C4.86903 1.512 4.93415 1.49902 4.99992 1.49902C5.06568 1.49902 5.13081 1.512 5.19155 1.5372C5.2523 1.56241 5.30747 1.59935 5.35392 1.64592L11.3539 7.64592C11.4005 7.69236 11.4374 7.74754 11.4626 7.80828C11.4878 7.86903 11.5008 7.93415 11.5008 7.99992C11.5008 8.06568 11.4878 8.13081 11.4626 8.19155C11.4374 8.2523 11.4005 8.30747 11.3539 8.35392L5.35392 14.3539C5.26003 14.4478 5.13269 14.5005 4.99992 14.5005C4.86714 14.5005 4.7398 14.4478 4.64592 14.3539C4.55203 14.26 4.49929 14.1327 4.49929 13.9999C4.49929 13.8671 4.55203 13.7398 4.64592 13.6459L10.2929 7.99992L4.64592 2.35392C4.59935 2.30747 4.56241 2.2523 4.5372 2.19155C4.512 2.13081 4.49902 2.06568 4.49902 1.99992C4.49902 1.93415 4.512 1.86903 4.5372 1.80828C4.56241 1.74754 4.59935 1.69236 4.64592 1.64592Z" fill="#828282"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- related news section -->
+        <div class="flex flex-col justify-start items-center self-stretch gap-4 md:gap-6">
+          <div class="flex flex-col md:flex-row justify-between items-start self-stretch gap-4">
+            <div class="flex justify-start items-start gap-3 md:gap-4 py-2 md:py-3">
+              <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
+              <p class="text-xl md:text-2xl font-bold text-black">Berita Terkait</p>
+            </div>
+            <button class="px-4 md:px-5 py-2.5 md:py-3.5 rounded-lg bg-[#e2f2ff] border border-[#0090ff] text-sm md:text-base font-medium text-[#0090ff]">
+              Lihat Semua
+            </button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 lg:gap-9 self-stretch">
+            @for (news of relatedNews(); track $index) {
+              <a [routerLink]="['/detail', category(), $index]" class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl hover:shadow-lg transition-shadow duration-300 cursor-pointer">
+                <div class="self-stretch h-40 md:h-44 lg:h-46.75 overflow-hidden rounded-lg bg-[#e0e0e0]">
+                  <img [src]="getImageUrl(news)" [alt]="news.title" class="w-full h-full object-cover" />
+                </div>
+                <div class="flex flex-col justify-start items-start self-stretch gap-2 md:gap-3 px-1 md:px-2">
+                  <p class="self-stretch text-sm md:text-base font-bold text-[#333] line-clamp-3 hover:text-[#0090ff] transition-colors">{{ news.title }}</p>
+                  <div class="flex justify-start items-center gap-2 md:gap-3">
+                    <p class="text-xs md:text-sm font-semibold text-[#0090ff] capitalize">{{ category() }}</p>
+                    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="2.25985" cy="2.25985" r="2.25985" fill="#D9D9D9"></circle>
+                    </svg>
+                    <p class="text-xs md:text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- sidebar -->
+      <div class="flex flex-col justify-start items-start w-full lg:w-104.75 gap-6 md:gap-8">
+        <div class="flex justify-start items-start gap-3 md:gap-4 py-2 md:py-3">
+          <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
+          <p class="text-xl md:text-2xl font-bold text-black">Berita Terpopuler</p>
+        </div>
+
+        <div class="flex flex-col justify-center items-start self-stretch gap-4 md:gap-6">
+          @for (news of popularNews(); track $index) {
+            <a [routerLink]="['/detail', 'nasional', $index]" class="flex justify-center items-start self-stretch h-auto md:h-40 gap-3 md:gap-4 p-3 md:p-4 rounded-xl relative hover:bg-gray-50 transition-colors duration-300 cursor-pointer">
+              <div class="shrink-0 w-32 md:w-36.75 h-28 md:h-32 overflow-hidden rounded-lg md:rounded-xl bg-white">
+                <img [src]="getSmallImageUrl(news)" [alt]="news.title" class="w-full h-full object-cover" />
+              </div>
+              <div class="flex flex-col justify-start items-start grow gap-3 md:gap-4">
+                <p class="self-stretch text-sm md:text-base font-bold text-[#333] line-clamp-3 hover:text-[#0090ff] transition-colors">{{ news.title }}</p>
+                <div class="flex justify-start items-center gap-2 md:gap-3">
+                  <p class="text-xs md:text-sm font-semibold text-[#0090ff]">Nasional</p>
+                  <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="2.37878" cy="2.37878" r="2.37878" fill="#D9D9D9"></circle>
+                  </svg>
+                  <p class="text-xs md:text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
+                </div>
+              </div>
+              <div class="flex flex-col justify-center items-start absolute left-1 top-0 gap-2.5 px-2 md:px-3 py-1 md:py-1.5 rounded-full bg-[#1f2b39]">
+                <p class="text-base md:text-lg font-bold text-white">{{ $index + 1 }}</p>
+              </div>
+            </a>
+            @if ($index < popularNews().length - 1) {
+              <svg width="419" height="1" viewBox="0 0 419 1" fill="none" xmlns="http://www.w3.org/2000/svg" class="self-stretch">
+                <line x1="419" y1="0.5" y2="0.5" stroke="#E0E0E0"></line>
+              </svg>
+            }
+          }
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <app-footer></app-footer>
+</div>

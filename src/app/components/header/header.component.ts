@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+  isScrolled = signal(false);
+
   menuItems = [
     { label: 'Beranda', route: '/', category: 'beranda' },
     { label: 'Terbaru', route: '/terbaru', category: 'terbaru' },
@@ -19,4 +21,9 @@ export class HeaderComponent {
     { label: 'Nasional', route: '/nasional', category: 'nasional' },
     { label: 'Internasional', route: '/internasional', category: 'internasional' }
   ];
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled.set(window.scrollY > 0);
+  }
 }

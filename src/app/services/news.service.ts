@@ -15,7 +15,7 @@ export class NewsService {
   }
 
   getLatestNews(): Observable<NewsResponse> {
-    return this.getNewsByCategory('terbaru');
+    return this.getNewsByCategory('nasional');
   }
 
   getNationalNews(): Observable<NewsResponse> {
@@ -44,5 +44,17 @@ export class NewsService {
 
   getLifestyleNews(): Observable<NewsResponse> {
     return this.getNewsByCategory('gaya-hidup');
+  }
+
+  getTerpopuler(): Observable<NewsResponse> {
+    return this.getNewsByCategory('nasional');
+  }
+
+  getHeadline(category: NewsCategory): Observable<NewsResponse> {
+    return this.getNewsByCategory(category);
+  }
+
+  getRecommended(): Observable<NewsResponse> {
+    return this.getNewsByCategory('internasional');
   }
 }
