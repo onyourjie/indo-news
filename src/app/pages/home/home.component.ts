@@ -17,10 +17,12 @@ export class HomeComponent implements OnInit {
   headlineNews = signal<NewsItem[]>([]);
   popularNews = signal<NewsItem[]>([]);
   recommendedNews = signal<NewsItem[]>([]);
+  allRecommendedNews = signal<NewsItem[]>([]);
   currentSlide = signal(0);
   currentPage = signal(1);
   itemsPerPage = 8;
   isLoading = signal(true);
+  searchQuery = signal<string>('');
 
   constructor(private newsService: NewsService) {}
 
@@ -68,6 +70,7 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         console.log('Recommended response:', response);
         if (response.data && response.data.length > 0) {
+          this.allRecommendedNews.set(response.data);
           this.recommendedNews.set(response.data);
           console.log('Recommended news loaded:', this.recommendedNews().length, 'items');
           this.isLoading.set(false);
@@ -82,6 +85,23 @@ export class HomeComponent implements OnInit {
         this.isLoading.set(false);
       }
     });
+  }
+
+  onSearch(event: Event) {
+    const input = event.target as HTMLInputElement;
+    const query = input.value.toLowerCase();
+    this.searchQuery.set(query);
+    this.currentPage.set(1);
+
+    if (query.trim() === '') {
+      this.recommendedNews.set(this.allRecommendedNews());
+    } else {
+      const filtered = this.allRecommendedNews().filter(news => 
+        news.title.toLowerCase().includes(query) ||
+        news.contentSnippet.toLowerCase().includes(query)
+      );
+      this.recommendedNews.set(filtered);
+    }
   }
 
   formatDate(dateString: string): string {

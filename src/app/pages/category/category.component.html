@@ -1,0 +1,146 @@
+<div class="w-full min-h-screen bg-white">
+  <app-header></app-header>
+
+  <!-- main content -->
+  <div class="flex flex-col justify-start items-center w-full px-4 md:px-8 lg:px-18 py-8 md:py-12 lg:py-18 gap-8 md:gap-12 lg:gap-16 mt-20 md:mt-24 lg:mt-28">
+    
+
+    @if (isLoading()) {
+      <div class="flex flex-col justify-center items-center w-full min-h-96 gap-4">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0090ff]"></div>
+        <p class="text-lg font-medium text-[#526071]">Memuat...</p>
+      </div>
+    }
+
+    @if (!isLoading()) {
+      <div class="flex flex-col md:flex-row justify-between items-start self-stretch gap-4 md:gap-6">
+        <div class="flex justify-start items-start gap-3 md:gap-4 py-2 md:py-3">
+          <div class="self-stretch w-1 rounded-full bg-[#0090ff]"></div>
+          <p class="text-2xl md:text-3xl font-bold text-black">{{ getCategoryTitle() }}</p>
+        </div>
+        
+        <div class="flex flex-col justify-start items-start w-full md:w-auto">
+          <div class="flex justify-start items-center self-stretch overflow-hidden gap-2.5 px-3 md:px-4 py-2 md:py-3 rounded-lg bg-white border border-[#e0e0e0]">
+            <div class="flex justify-start items-center grow gap-2.5">
+              <input 
+                type="text" 
+                placeholder="Cari disini..." 
+                (input)="onSearch($event)"
+                class="grow text-sm md:text-base text-[#333] placeholder:text-[#959ea9] outline-none min-w-50 md:min-w-75"
+              />
+            </div>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_6_4085)">
+                <path d="M11.742 10.344C12.7103 9.02267 13.144 7.38447 12.9563 5.75713C12.7687 4.12979 11.9735 2.63332 10.7298 1.56711C9.48616 0.500899 7.88579 -0.056418 6.24888 0.00665514C4.61197 0.0697283 3.05923 0.748541 1.90131 1.90729C0.743395 3.06603 0.0656939 4.61925 0.00379204 6.25621C-0.0581098 7.89317 0.500353 9.49314 1.56745 10.736C2.63455 11.9789 4.13159 12.773 5.75906 12.9596C7.38654 13.1461 9.02442 12.7112 10.345 11.742H10.344C10.374 11.782 10.406 11.82 10.442 11.857L14.292 15.707C14.4796 15.8946 14.7339 16.0001 14.9992 16.0002C15.2645 16.0003 15.5189 15.895 15.7065 15.7075C15.8942 15.52 15.9997 15.2656 15.9997 15.0003C15.9998 14.7351 15.8946 14.4806 15.707 14.293L11.857 10.443C11.8213 10.4068 11.7828 10.3744 11.742 10.344ZM12 6.49998C12 7.22225 11.8578 7.93745 11.5814 8.60474C11.305 9.27203 10.8999 9.87834 10.3891 10.3891C9.87841 10.8998 9.27209 11.3049 8.6048 11.5813C7.93751 11.8577 7.22231 12 6.50004 12C5.77777 12 5.06258 11.8577 4.39528 11.5813C3.72799 11.3049 3.12168 10.8998 2.61096 10.3891C2.10023 9.87834 1.69511 9.27203 1.41871 8.60474C1.14231 7.93745 1.00004 7.22225 1.00004 6.49998C1.00004 5.04129 1.57951 3.64234 2.61096 2.61089C3.64241 1.57944 5.04135 0.999979 6.50004 0.999979C7.95873 0.999979 9.35768 1.57944 10.3891 2.61089C11.4206 3.64234 12 5.04129 12 6.49998Z" fill="#333333"></path>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      @if (searchQuery()) {
+        <div class="self-stretch">
+          <p class="text-sm md:text-base text-[#526071]">
+            Menampilkan {{ filteredNews().length }} hasil untuk "{{ searchQuery() }}"
+          </p>
+        </div>
+      }
+
+      @if (filteredNews().length > 0) {
+        <div class="flex flex-col justify-start items-center self-stretch gap-8 md:gap-12 lg:gap-16">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8 lg:gap-10 self-stretch">
+            @for (news of paginatedNews; track $index) {
+              <a 
+                [routerLink]="['/detail', category(), (currentPage() - 1) * itemsPerPage + $index]" 
+                class="flex flex-col justify-start items-start gap-3 md:gap-4 rounded-xl cursor-pointer"
+              >
+                <div class="self-stretch h-48 md:h-52 lg:h-56 overflow-hidden rounded-xl bg-[#e0e0e0]">
+                  <img 
+                    [src]="getImageUrl(news)" 
+                    [alt]="news.title"
+                    class="w-full h-full object-cover"
+                  />
+                </div>
+                <div class="flex flex-col justify-start items-start self-stretch gap-2 md:gap-3 px-1 md:px-2">
+                  <p class="self-stretch text-sm md:text-base font-bold text-[#333] line-clamp-3 hover:text-[#0090ff] transition-colors">
+                    {{ news.title }}
+                  </p>
+                  <div class="flex justify-start items-center gap-2 md:gap-3">
+                    <p class="text-xs md:text-sm font-semibold text-[#0090ff] capitalize">{{ getCategoryTitle() }}</p>
+                    <svg width="5" height="5" viewBox="0 0 5 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <circle cx="2.37878" cy="2.37878" r="2.37878" fill="#D9D9D9"></circle>
+                    </svg>
+                    <p class="text-xs md:text-sm font-medium text-[#526071]">{{ formatDate(news.isoDate) }}</p>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
+
+          <!-- pagination -->
+          @if (totalPages > 1) {
+            <div class="flex justify-start items-center self-stretch overflow-hidden gap-4 md:gap-14 px-2 md:px-4 py-4 md:py-5 bg-white">
+              <div class="flex flex-col md:flex-row justify-between items-center grow overflow-hidden gap-4">
+                <p class="text-xs md:text-sm lg:text-base text-[#333] text-center md:text-left">
+                  Menampilkan {{ (currentPage() - 1) * itemsPerPage + 1 }} sampai {{ showingTo }} dari {{ filteredNews().length }} hasil
+                </p>
+                <div class="flex justify-start items-center gap-2 md:gap-5 flex-wrap">
+                  <button 
+                    (click)="changePage(currentPage() - 1)"
+                    [disabled]="currentPage() === 1"
+                    class="flex justify-start items-center gap-1 md:gap-1.5 disabled:opacity-50 px-2 md:px-0"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 8.0001C12 8.13271 11.9473 8.25989 11.8536 8.35365C11.7598 8.44742 11.6326 8.5001 11.5 8.5001H5.707L7.854 10.6461C7.94789 10.74 8.00063 10.8673 8.00063 11.0001C8.00063 11.1329 7.94789 11.2602 7.854 11.3541C7.76011 11.448 7.63278 11.5007 7.5 11.5007C7.36722 11.5007 7.23989 11.448 7.146 11.3541L4.146 8.3541C4.09945 8.30766 4.06253 8.25248 4.03733 8.19173C4.01212 8.13099 3.99915 8.06587 3.99915 8.0001C3.99915 7.93433 4.01212 7.86921 4.03733 7.80847C4.06253 7.74772 4.09945 7.69255 4.146 7.6461L7.146 4.6461C7.23989 4.55221 7.36722 4.49947 7.5 4.49947C7.63278 4.49947 7.76011 4.55221 7.854 4.6461C7.94789 4.73999 8.00063 4.86732 8.00063 5.0001C8.00063 5.13288 7.94789 5.26021 7.854 5.3541L5.707 7.5001H11.5C11.6326 7.5001 11.7598 7.55278 11.8536 7.64655C11.9473 7.74032 12 7.86749 12 8.0001Z" fill="#828282"></path>
+                    </svg>
+                    <p class="text-sm md:text-base text-[#526071] hidden sm:block">Previous</p>
+                  </button>
+
+                  @for (page of [].constructor(totalPages); track $index) {
+                    @if ($index + 1 === 1 || $index + 1 === totalPages || ($index + 1 >= currentPage() - 1 && $index + 1 <= currentPage() + 1)) {
+                      <button 
+                        (click)="changePage($index + 1)"
+                        [class]="currentPage() === $index + 1 ? 'px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm md:text-base text-[#0090ff] bg-[#e2f2ff] font-semibold' : 'px-3 md:px-4 py-1.5 md:py-2 rounded-lg text-sm md:text-base text-[#526071] hover:bg-gray-50'"
+                      >
+                        {{ $index + 1 }}
+                      </button>
+                    } @else if ($index + 1 === currentPage() - 2 || $index + 1 === currentPage() + 2) {
+                      <p class="text-base font-medium text-[#526071]">...</p>
+                    }
+                  }
+
+                  <button 
+                    (click)="changePage(currentPage() + 1)"
+                    [disabled]="currentPage() === totalPages"
+                    class="flex justify-start items-center gap-1 md:gap-1.5 disabled:opacity-50 px-2 md:px-0"
+                  >
+                    <p class="text-sm md:text-base text-[#526071] hidden sm:block">Next</p>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M4 7.9999C4 7.86729 4.05268 7.74011 4.14645 7.64635C4.24021 7.55258 4.36739 7.4999 4.5 7.4999H10.293L8.146 5.3539C8.05211 5.26001 7.99937 5.13268 7.99937 4.9999C7.99937 4.86712 8.05211 4.73979 8.146 4.6459C8.23989 4.55201 8.36722 4.49927 8.5 4.49927C8.63278 4.49927 8.76011 4.55201 8.854 4.6459L11.854 7.6459C11.9006 7.69234 11.9375 7.74752 11.9627 7.80827C11.9879 7.86901 12.0009 7.93413 12.0009 7.9999C12.0009 8.06567 11.9879 8.13079 11.9627 8.19153C11.9375 8.25228 11.9006 8.30745 11.854 8.3539L8.854 11.3539C8.76011 11.4478 8.63278 11.5005 8.5 11.5005C8.36722 11.5005 8.23989 11.4478 8.146 11.3539C8.05211 11.26 7.99937 11.1327 7.99937 10.9999C7.99937 10.8671 8.05211 10.7398 8.146 10.6459L10.293 8.4999H4.5C4.36739 8.4999 4.24021 8.44722 4.14645 8.35345C4.05268 8.25968 4 8.13251 4 7.9999Z" fill="#828282"></path>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      } @else {
+        <div class="flex flex-col justify-center items-center w-full min-h-64 gap-4">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8C18.745 8 8 18.745 8 32C8 45.255 18.745 56 32 56C45.255 56 56 45.255 56 32C56 18.745 45.255 8 32 8ZM32 52C20.972 52 12 43.028 12 32C12 20.972 20.972 12 32 12C43.028 12 52 20.972 52 32C52 43.028 43.028 52 32 52Z" fill="#E0E0E0"/>
+            <path d="M38 26C38 27.1046 37.1046 28 36 28C34.8954 28 34 27.1046 34 26C34 24.8954 34.8954 24 36 24C37.1046 24 38 24.8954 38 26Z" fill="#E0E0E0"/>
+            <path d="M30 26C30 27.1046 29.1046 28 28 28C26.8954 28 26 27.1046 26 26C26 24.8954 26.8954 24 28 24C29.1046 24 30 24.8954 30 26Z" fill="#E0E0E0"/>
+            <path d="M24 36C24 38.2091 28.4772 42 32 42C35.5228 42 40 38.2091 40 36H24Z" fill="#E0E0E0"/>
+          </svg>
+          <p class="text-lg font-medium text-[#526071]">Tidak ada berita ditemukan</p>
+          @if (searchQuery()) {
+            <p class="text-sm text-[#959ea9]">Coba kata kunci lain</p>
+          }
+        </div>
+      }
+    }
+
+  </div>
+
+  <app-footer></app-footer>
+</div>

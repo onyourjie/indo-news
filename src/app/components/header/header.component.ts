@@ -14,12 +14,13 @@ export class HeaderComponent {
 
   menuItems = [
     { label: 'Beranda', route: '/', category: 'beranda' },
-    { label: 'Terbaru', route: '/terbaru', category: 'terbaru' },
-    { label: 'Hiburan', route: '/hiburan', category: 'hiburan' },
-    { label: 'Gaya Hidup', route: '/gaya-hidup', category: 'gaya-hidup' },
-    { label: 'Olahraga', route: '/olahraga', category: 'olahraga' },
     { label: 'Nasional', route: '/nasional', category: 'nasional' },
-    { label: 'Internasional', route: '/internasional', category: 'internasional' }
+    { label: 'Internasional', route: '/internasional', category: 'internasional' },
+    { label: 'Ekonomi', route: '/ekonomi', category: 'ekonomi' },
+    { label: 'Olahraga', route: '/olahraga', category: 'olahraga' },
+    { label: 'Teknologi', route: '/teknologi', category: 'teknologi' },
+    { label: 'Hiburan', route: '/hiburan', category: 'hiburan' },
+    { label: 'Gaya Hidup', route: '/gaya-hidup', category: 'gaya-hidup' }
   ];
 
   @HostListener('window:scroll', [])

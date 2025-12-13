@@ -19,6 +19,7 @@ export class DetailComponent implements OnInit {
   category = signal<string>('');
   newsIndex = signal<number>(0);
   allNews = signal<any[]>([]);
+  isLoading = signal(true);
   comments = signal<any[]>([
     {
       id: 1,
@@ -53,6 +54,7 @@ export class DetailComponent implements OnInit {
   }
 
   loadNewsDetail() {
+    this.isLoading.set(true);
     const category = this.category() as any;
     this.newsService.getHeadline(category).subscribe({
       next: (response: any) => {
@@ -61,9 +63,11 @@ export class DetailComponent implements OnInit {
         if (response.data && response.data[index]) {
           this.newsDetail.set(response.data[index]);
         }
+        this.isLoading.set(false);
       },
       error: (error: any) => {
         console.error('Error loading news detail:', error);
+        this.isLoading.set(false);
       }
     });
   }
