@@ -32,17 +32,25 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
   currentBanner = signal(0);
   private bannerInterval: any;
+  
+  // auto-slide menganjayyy
+  private headlineInterval: any;
+  private headlineDelayIndex = 0;
 
   constructor(private newsService: NewsService) {}
 
   ngOnInit() {
     this.loadNews();
     this.startBannerAutoSlide();
+    this.startHeadlineAutoSlide();
   }
 
   ngOnDestroy() {
     if (this.bannerInterval) {
       clearInterval(this.bannerInterval);
+    }
+    if (this.headlineInterval) {
+      clearInterval(this.headlineInterval);
     }
   }
 
@@ -50,6 +58,26 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.bannerInterval = setInterval(() => {
       this.currentBanner.update(val => (val + 1) % this.banners.length);
     }, 5000);
+  }
+
+  startHeadlineAutoSlide() {
+    const scheduleNext = () => {
+      const delays = [2000, 3000, 4000, 5000];
+      const delay = delays[this.headlineDelayIndex % delays.length];
+      this.headlineDelayIndex++;
+
+      this.headlineInterval = setTimeout(() => {
+        const maxSlide = this.headlineNews().length - 1;
+        if (this.currentSlide() < maxSlide) {
+          this.currentSlide.update(val => val + 1);
+        } else {
+          this.currentSlide.set(0);
+        }
+      
+        scheduleNext();
+      }, delay);
+    };
+    scheduleNext();
   }
 
   loadNews() {
@@ -141,12 +169,21 @@ export class HomeComponent implements OnInit, OnDestroy {
     if (this.currentSlide() < maxSlide) {
       this.currentSlide.update(val => val + 1);
     }
+    this.resetHeadlineAutoSlide();
   }
 
   prevSlide() {
     if (this.currentSlide() > 0) {
       this.currentSlide.update(val => val - 1);
     }
+    this.resetHeadlineAutoSlide();
+  }
+
+  resetHeadlineAutoSlide() {
+    if (this.headlineInterval) {
+      clearTimeout(this.headlineInterval);
+    }
+    this.startHeadlineAutoSlide();
   }
 
   get paginatedRecommendedNews() {
