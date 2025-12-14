@@ -37,6 +37,7 @@ export class CategoryComponent implements OnInit {
 
   loadCategoryNews(category: string) {
     this.isLoading.set(true);
+    this.searchQuery.set(''); // reset kategori
     
     // Map category to service method
     let newsObservable;

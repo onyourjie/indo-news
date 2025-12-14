@@ -94,7 +94,9 @@
 
           <!-- comment form -->
           <div class="flex justify-start items-start self-stretch gap-3 md:gap-4 p-4 md:p-6 bg-white border-b border-[#e0e0e0]">
-            <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+            <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0] overflow-hidden">
+              <img [src]="getProfilePicture(0)" alt="Profile" class="w-full h-full object-cover" />
+            </div>
             <div class="flex flex-col justify-start items-start grow gap-3 md:gap-1.5">
               <textarea 
                 placeholder="Apa yang ingin anda tanyakan?"
@@ -113,7 +115,9 @@
           @for (comment of comments(); track comment.id) {
             <div class="flex flex-col justify-start items-start self-stretch gap-3 md:gap-4 p-4 md:p-6 bg-white border-b border-[#e0e0e0]">
               <div class="flex justify-start items-start self-stretch gap-3 md:gap-4">
-                <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+                <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0] overflow-hidden">
+                  <img [src]="getProfilePicture(comment.id)" alt="Profile" class="w-full h-full object-cover" />
+                </div>
                 <div class="flex flex-col justify-start items-start grow gap-2 md:gap-3">
                   <div class="flex justify-start items-center gap-2 md:gap-3">
                     <p class="text-xs md:text-sm font-medium text-[#526071]">{{ comment.author }}</p>
@@ -130,7 +134,9 @@
               <!-- replies -->
               @for (reply of comment.replies; track reply.id) {
                 <div class="flex justify-start items-start self-stretch gap-3 md:gap-4 pl-12 md:pl-18">
-                  <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0]"></div>
+                  <div class="shrink-0 w-12 h-12 md:w-14 md:h-14 rounded-lg bg-[#e0e0e0] overflow-hidden">
+                    <img [src]="getProfilePicture(reply.id)" alt="Profile" class="w-full h-full object-cover" />
+                  </div>
                   <div class="flex flex-col justify-start items-start grow gap-2 md:gap-3">
                     <div class="flex justify-start items-center gap-2 md:gap-3">
                       <p class="text-xs md:text-sm font-medium text-[#526071]">{{ reply.author }}</p>

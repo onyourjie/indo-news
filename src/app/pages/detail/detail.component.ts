@@ -118,4 +118,9 @@ export class DetailComponent implements OnInit {
   getSmallImageUrl(news: any): string {
     return news?.thumbnail || news?.image?.small || 'https://via.placeholder.com/300x200';
   }
+
+  getProfilePicture(id: number): string {
+    const profileIndex = (id % 3) + 1;
+    return `assets/profile${profileIndex}.svg`;
+  }
 }

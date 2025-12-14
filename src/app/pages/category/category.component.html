@@ -25,6 +25,7 @@
               <input 
                 type="text" 
                 placeholder="Cari disini..." 
+                [value]="searchQuery()"
                 (input)="onSearch($event)"
                 class="grow text-sm md:text-base text-[#333] placeholder:text-[#959ea9] outline-none min-w-50 md:min-w-75"
               />
