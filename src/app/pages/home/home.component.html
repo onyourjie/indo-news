@@ -230,14 +230,14 @@
 
     <!-- banner section -->
     <div class="flex justify-center items-center self-stretch w-full overflow-hidden rounded-2xl">
-      <div class="relative w-full h-48 md:h-64 lg:h-80 overflow-hidden rounded-2xl">
+      <div class="relative w-full h-64 md:h-96 lg:h-125 overflow-hidden rounded-2xl">
         <div class="flex transition-transform duration-700 ease-in-out h-full" [style.transform]="'translateX(-' + (currentBanner() * 100) + '%)'">
           @for (banner of banners; track $index) {
             <div class="w-full h-full shrink-0">
               <img 
                 [src]="banner" 
                 alt="Banner {{ $index + 1 }}"
-                class="w-full h-full object-contain"
+                class="w-full h-full object-cover"
               />
             </div>
           }
